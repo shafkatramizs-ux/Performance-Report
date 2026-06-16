@@ -70,7 +70,7 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
 
 
   return (
-    <div className="print-page max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
+    <div className="print-page w-[210mm] h-[297mm] max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
       <div className="flex-none mb-4 border-b-2 border-[#1e2a5e] pb-2 flex justify-between items-end">
         <div>
           <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
