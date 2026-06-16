@@ -17,8 +17,8 @@
 
     .print-page {
       width: 210mm !important;
-      height: 297mm !important;
-      max-height: 297mm !important;
+      height: 296mm !important;
+      max-height: 296mm !important;
       max-width: 210mm !important;
       margin: 0 !important;
       padding: 8mm !important;
@@ -26,6 +26,9 @@
       box-sizing: border-box;
       box-shadow: none !important;
       overflow: hidden !important;
+    }
+    .print-page:last-child {
+      page-break-after: auto;
     }
   }
 }

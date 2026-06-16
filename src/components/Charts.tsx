@@ -102,7 +102,7 @@ export const Visual2 = ({ data, className }: { data: any[], className?: string }
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
           {chartType === 'bar' ? (
-            <BarChart data={data} margin={{ top: 20, right: 20, left: -10, bottom: 0 }}>
+            <BarChart data={data} margin={{ top: 20, right: 30, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
               <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
               <YAxis tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} tick={{fontSize: 10}} tickLine={false} axisLine={false} />
@@ -116,7 +116,7 @@ export const Visual2 = ({ data, className }: { data: any[], className?: string }
               </Bar>
             </BarChart>
           ) : (
-            <LineChart data={data} margin={{ top: 20, right: 20, left: -10, bottom: 0 }}>
+            <LineChart data={data} margin={{ top: 20, right: 30, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
               <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
               <YAxis tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} tick={{fontSize: 10}} tickLine={false} axisLine={false} />
@@ -142,7 +142,7 @@ export const Visual3 = ({ data, className }: { data: any[], className?: string }
       <h3 className="text-[13px] font-semibold text-center mb-2 text-[#1e2a5e]">Risk Trend: PAR &gt; 30</h3>
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 20, right: 20, left: -20, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 20, right: 30, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
             <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
             <YAxis tickFormatter={(val) => `${(val * 100).toFixed(1)}%`} tick={{fontSize: 10}} tickLine={false} axisLine={false} />
@@ -163,7 +163,7 @@ export const Visual4 = ({ data, className }: { data: any[], className?: string }
       <h3 className="text-[13px] font-semibold text-center mb-2 text-[#1e2a5e]">Current Borrowers vs Per Borrowers OS</h3>
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 20, right: 20, left: -20, bottom: 0 }}>
+          <ComposedChart data={data} margin={{ top: 20, right: 30, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
             <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
             <YAxis yAxisId="left" tick={{fontSize: 10}} tickLine={false} axisLine={false} />
@@ -171,7 +171,7 @@ export const Visual4 = ({ data, className }: { data: any[], className?: string }
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: '10px' }} />
             <Bar yAxisId="left" dataKey="CurrentBorrowers" fill="#94a3b8" name="Current Borrowers" opacity={0.5}>
-              <LabelList dataKey="CurrentBorrowers" content={<CustomDataLabel position="insideTop" dy={16} formatter={(v: number) => v > 1000 ? `${(v/1000).toFixed(1)}k` : v} />} />
+              <LabelList dataKey="CurrentBorrowers" content={<CustomDataLabel position="insideTop" dy={32} formatter={(v: number) => v > 1000 ? `${(v/1000).toFixed(1)}k` : v} />} />
             </Bar>
             <Line yAxisId="right" type="monotone" dataKey="PerBorrowerOS" stroke="#1e2a5e" strokeWidth={2} dot={{r:2}} name="Per Borrower OS">
               <LabelList dataKey="PerBorrowerOS" content={<CustomDataLabel offset={-16} formatter={(v: number) => `$${v}`} />} />

@@ -17,7 +17,7 @@ export function Dashboard({ rawData, allMonths, selectedMonth, usdRate, onMonthC
   const parsedData = useMemo(() => new DashboardData(rawData, usdRate), [rawData, usdRate]);
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-12 font-sans select-none">
+    <div className="min-h-screen bg-gray-100 pb-12 font-sans select-none print:min-h-0 print:bg-white print:pb-0">
       {/* Control bar - hidden during print */}
       <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm print:hidden sticky top-0 z-50">
         <h2 className="text-xl font-semibold text-[#1e2a5e]">Sajida Dashboard Generator</h2>
