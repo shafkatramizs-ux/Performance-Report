@@ -94,7 +94,7 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
       </div>
 
       <div className="flex-1 flex flex-col min-h-0">
-        <div className="grid grid-cols-2 gap-6 flex-1 min-h-0">
+        <div className="grid grid-cols-2 gap-6 flex-1 min-h-0 max-h-[320px]">
           <Visual1 data={v1Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded" />
           <Visual2 data={v2Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded relative" />
         </div>

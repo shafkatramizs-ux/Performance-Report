@@ -76,22 +76,22 @@ export function GenericTable({ title, columns, rows, showGrowth, superTitle }: G
 
             return (
               <tr key={idx} className="hover:bg-gray-50">
-                <td className="py-1 px-2 border border-gray-200 text-[11px] sm:text-xs font-medium text-gray-700 bg-gray-50/50">
+                <td className="py-1.5 px-2 border border-gray-200 text-xs sm:text-sm font-medium text-gray-700 bg-gray-50/50">
                   {row.label}
                 </td>
                 {columns.map((col) => (
-                  <td key={col} className="py-1 px-1 border border-gray-200 text-[10px] sm:text-xs text-right text-gray-700">
+                  <td key={col} className="py-1.5 px-1.5 border border-gray-200 text-[11px] sm:text-xs text-right text-gray-700">
                     {row.renderValue(col, row.values[col])}
                   </td>
                 ))}
                 {showGrowth && (
                   <>
-                    <td className="py-1 px-1 border border-gray-200 text-[10px] sm:text-xs text-right font-medium">
+                    <td className="py-1.5 px-1.5 border border-gray-200 text-[11px] sm:text-xs text-right font-medium">
                       <span className={clsx(mom && mom > 0 ? 'text-green-600' : mom && mom < 0 ? 'text-red-600' : 'text-gray-500')}>
                         {mom !== undefined ? new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(mom) : '-'}
                       </span>
                     </td>
-                    <td className="py-1 px-1 border border-gray-200 text-[10px] sm:text-xs text-right font-medium">
+                    <td className="py-1.5 px-1.5 border border-gray-200 text-[11px] sm:text-xs text-right font-medium">
                       <span className={clsx(yoy && yoy > 0 ? 'text-green-600' : yoy && yoy < 0 ? 'text-red-600' : 'text-gray-500')}>
                         {yoy !== undefined ? new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(yoy) : '-'}
                       </span>

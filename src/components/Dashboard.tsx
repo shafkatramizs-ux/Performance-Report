@@ -58,7 +58,7 @@ export function Dashboard({ rawData, allMonths, selectedMonth, usdRate, onMonthC
       </div>
 
       {/* Pages Container */}
-      <div className="pt-8 flex flex-col items-center">
+      <div className="pt-8 flex flex-col items-center print:pt-0 print:block">
         <Page1 data={parsedData} allMonths={allMonths} selectedMonth={selectedMonth} />
         <Page2 data={parsedData} allMonths={allMonths} selectedMonth={selectedMonth} />
       </div>

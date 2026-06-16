@@ -18,16 +18,14 @@
     .print-page {
       width: 210mm !important;
       height: 297mm !important;
-      min-height: 297mm !important;
       max-height: 297mm !important;
       max-width: 210mm !important;
       margin: 0 !important;
-      padding: 10mm !important;
+      padding: 8mm !important;
       page-break-after: always;
-      page-break-inside: avoid;
       box-sizing: border-box;
       box-shadow: none !important;
-      overflow: hidden;
+      overflow: hidden !important;
     }
   }
 }
