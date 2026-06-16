@@ -69,33 +69,36 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
   }));
 
   return (
-    <div className="print-page w-full max-w-[210mm] min-h-[297mm] mx-auto bg-white p-8 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900">
-       <div className="mb-6 border-b-2 border-[#1e2a5e] pb-4 flex justify-between items-end">
+    <div className="print-page w-[210mm] h-[297mm] max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
+       <div className="flex-none mb-4 border-b-2 border-[#1e2a5e] pb-2 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider">Sajida Microfinance</h1>
-          <p className="text-gray-500 text-sm mt-1">License No: UMRA03783ND</p>
+          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
+          <p className="text-gray-500 text-xs mt-0.5">License No: UMRA03783ND</p>
         </div>
         <div className="text-right">
-          <p className="font-semibold text-gray-700">Period: {selectedMonth}</p>
+          <p className="font-semibold text-gray-700 text-sm">Period: {selectedMonth}</p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        {/* Full width stretching table 2 */}
-        <GenericTable title="Outreach & Operations" superTitle="Quarter end & latest position" columns={tableCols} rows={t2Rows} />
+      <div className="flex-1 flex flex-col gap-3 min-h-0">
+        <div className="flex-none">
+          <GenericTable title="Outreach & Operations" superTitle="Quarter end & latest position" columns={tableCols} rows={t2Rows} />
+        </div>
         
-        {/* Two visuals side-by-side underneath */}
-        <div className="grid grid-cols-2 gap-6 pb-2 min-h-[300px]">
-          <Visual3 data={v3Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-4 rounded" />
-          <Visual4 data={v4Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-4 rounded" />
+        <div className="flex-1 min-h-0 flex flex-col">
+          <div className="grid grid-cols-2 gap-4 flex-1 min-h-[160px]">
+            <Visual3 data={v3Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-2 rounded" />
+            <Visual4 data={v4Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-2 rounded" />
+          </div>
         </div>
 
-        {/* Remaining tables stretched */}
-        <GenericTable title="Asset Quality & Risk" superTitle="Quarter end & latest position" columns={tableCols} rows={t3Rows} />
-        <GenericTable title="Security Deposit Statistics" superTitle="Quarter end & latest position" columns={tableCols} rows={t4Rows} />
+        <div className="flex-none flex flex-col gap-3">
+          <GenericTable title="Asset Quality & Risk" superTitle="Quarter end & latest position" columns={tableCols} rows={t3Rows} />
+          <GenericTable title="Security Deposit Statistics" superTitle="Quarter end & latest position" columns={tableCols} rows={t4Rows} />
+        </div>
       </div>
 
-      <div className="mt-auto pt-6 text-xs text-gray-500 italic">
+      <div className="flex-none mt-3 text-[10px] text-gray-500 italic">
         *1 USD = {data.getUsdRate()} UGX
       </div>
     </div>

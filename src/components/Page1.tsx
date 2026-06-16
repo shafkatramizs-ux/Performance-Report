@@ -70,35 +70,37 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
 
 
   return (
-    <div className="print-page w-full max-w-[210mm] min-h-[297mm] mx-auto bg-white p-8 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900">
-      <div className="mb-6 border-b-2 border-[#1e2a5e] pb-4 flex justify-between items-end">
+    <div className="print-page w-[210mm] h-[297mm] max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
+      <div className="flex-none mb-4 border-b-2 border-[#1e2a5e] pb-2 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider">Sajida Microfinance</h1>
-          <p className="text-gray-500 text-sm mt-1">License No: UMRA03783ND</p>
-          <p className="text-gray-500 text-sm">Performance Report Dashboard</p>
+          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
+          <p className="text-gray-500 text-xs mt-0.5">License No: UMRA03783ND</p>
+          <p className="text-gray-500 text-xs">Performance Report Dashboard</p>
         </div>
         <div className="text-right">
-          <p className="font-semibold text-gray-700">Period: {selectedMonth}</p>
+          <p className="font-semibold text-gray-700 text-sm">Period: {selectedMonth}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="flex-none grid grid-cols-4 gap-4 mb-6">
         <KPICard title="Total Outstanding" value={formatUSD(currentTotalOs)} />
         <KPICard title="PAR > 30 Days" value={formatPercent(currentPar30)} />
         <KPICard title="Current Borrowers" value={formatNumber(currentBorrower)} />
         <KPICard title="Cumulative Disb." value={formatUSD(cumulativeDisb)} />
       </div>
 
-      <div className="mb-8 flex-grow">
+      <div className="flex-none mb-4">
         <GenericTable title="Particulars" superTitle="Disbursement & Outstanding (Month End & Growth Statistics)" columns={table1Cols} rows={t1Rows} showGrowth={true} />
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-auto flex-grow min-h-[400px]">
-        <Visual1 data={v1Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-4 rounded" />
-        <Visual2 data={v2Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-4 rounded relative" />
+      <div className="flex-1 flex flex-col min-h-0">
+        <div className="grid grid-cols-2 gap-6 flex-1 min-h-0">
+          <Visual1 data={v1Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded" />
+          <Visual2 data={v2Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded relative" />
+        </div>
       </div>
       
-      <div className="mt-6 text-xs text-gray-500 italic">
+      <div className="flex-none mt-4 text-[10px] text-gray-500 italic">
         *1 USD = {data.getUsdRate()} UGX
       </div>
     </div>
