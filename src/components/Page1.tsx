@@ -1,0 +1,106 @@
+import React from 'react';
+import { KPICard } from './KPICard';
+import { GenericTable, TableRowProps } from './Table';
+import { Visual1, Visual2 } from './Charts';
+import { DashboardData } from '../utils/dashboardData';
+import { formatUSD, formatNumber, formatPercent } from '../utils/formatters';
+import { getTable1Columns } from '../utils/dateHelpers';
+
+export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData, allMonths: string[], selectedMonth: string }) {
+  const table1Cols = getTable1Columns(allMonths, selectedMonth);
+
+  // KPIs
+  const currentTotalOs = data.getTotalOutstandingUSD(selectedMonth);
+  const currentPar30 = data.getPar30(selectedMonth);
+  const currentBorrower = data.getCurrentBorrower(selectedMonth);
+  const cumulativeDisb = data.getCumulativeDisbursementUSD(selectedMonth);
+
+  const t1Rows: TableRowProps[] = [
+    { label: 'New Loan Number', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'Repeat Loan Number', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'Total Loan Disbursed (number)', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'New Loan Disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Repeat Loan (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Total amount of Loan (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'SML Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'SEL Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Total Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+  ];
+
+  table1Cols.forEach(col => {
+    t1Rows[0].values[col] = data.getNewLoanNumber(col);
+    t1Rows[1].values[col] = data.getRepeatLoanNumber(col);
+    t1Rows[2].values[col] = data.getTotalLoanDisbursedNumber(col);
+    t1Rows[3].values[col] = data.getNewLoanDisbursedUSD(col);
+    t1Rows[4].values[col] = data.getRepeatLoanDisbursedUSD(col);
+    t1Rows[5].values[col] = data.getTotalLoanDisbursedUSD(col);
+    t1Rows[6].values[col] = data.getSmlOutstandingUSD(col);
+    t1Rows[7].values[col] = data.getSelOutstandingUSD(col);
+    t1Rows[8].values[col] = data.getTotalOutstandingUSD(col);
+  });
+
+  // Calculate 12m for charts
+  const mIndex = allMonths.indexOf(selectedMonth);
+  let chartMonths = allMonths.slice(Math.max(0, mIndex - 11), mIndex + 1);
+  if (chartMonths.length < 12) {
+    const pad = Array(12 - chartMonths.length).fill('');
+    chartMonths = [...pad, ...chartMonths];
+  }
+
+  const v1Data = chartMonths.map((m, i) => {
+    if (!m) return { month: '', SML: 0, SEL: 0 };
+    const sml = data.getSmlOutstandingUSD(m);
+    const sel = data.getSelOutstandingUSD(m);
+    const total = sml + sel;
+    return {
+      month: m,
+      SML: total ? sml / total : 0,
+      SEL: total ? sel / total : 0,
+    };
+  });
+
+  const v2Data = chartMonths.map(m => {
+    if (!m) return { month: '', AvgNew: 0, AvgRepeat: 0 };
+    return {
+      month: m,
+      AvgNew: data.getAverageLoanSizeNew(m),
+      AvgRepeat: data.getAverageLoanSizeRepeat(m),
+    };
+  });
+
+
+  return (
+    <div className="print-page w-full max-w-[210mm] min-h-[297mm] mx-auto bg-white p-8 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900">
+      <div className="mb-6 border-b-2 border-[#1e2a5e] pb-4 flex justify-between items-end">
+        <div>
+          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider">Sajida Microfinance</h1>
+          <p className="text-gray-500 text-sm mt-1">License No: UMRA03783ND</p>
+          <p className="text-gray-500 text-sm">Performance Report Dashboard</p>
+        </div>
+        <div className="text-right">
+          <p className="font-semibold text-gray-700">Period: {selectedMonth}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        <KPICard title="Total Outstanding" value={formatUSD(currentTotalOs)} />
+        <KPICard title="PAR > 30 Days" value={formatPercent(currentPar30)} />
+        <KPICard title="Current Borrowers" value={formatNumber(currentBorrower)} />
+        <KPICard title="Cumulative Disb." value={formatUSD(cumulativeDisb)} />
+      </div>
+
+      <div className="mb-8 flex-grow">
+        <GenericTable title="Particulars" superTitle="Disbursement & Outstanding (Month End & Growth Statistics)" columns={table1Cols} rows={t1Rows} showGrowth={true} />
+      </div>
+
+      <div className="grid grid-cols-2 gap-6 mt-auto flex-grow min-h-[400px]">
+        <Visual1 data={v1Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-4 rounded" />
+        <Visual2 data={v2Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-4 rounded relative" />
+      </div>
+      
+      <div className="mt-6 text-xs text-gray-500 italic">
+        *1 USD = {data.getUsdRate()} UGX
+      </div>
+    </div>
+  );
+}
