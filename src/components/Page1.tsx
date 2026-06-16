@@ -93,8 +93,8 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
         <GenericTable title="Particulars" superTitle="Disbursement & Outstanding (Month End & Growth Statistics)" columns={table1Cols} rows={t1Rows} showGrowth={true} />
       </div>
 
-      <div className="flex-1 flex flex-col min-h-0">
-        <div className="grid grid-cols-2 gap-6 flex-1 min-h-0 max-h-[320px]">
+      <div className="flex-1 flex flex-col min-h-0 pb-2">
+        <div className="grid grid-cols-2 gap-6 flex-1 min-h-0">
           <Visual1 data={v1Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded" />
           <Visual2 data={v2Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded relative" />
         </div>

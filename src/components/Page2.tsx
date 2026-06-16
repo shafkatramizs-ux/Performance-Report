@@ -86,9 +86,9 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
         </div>
         
         <div className="flex-1 min-h-0 flex flex-col">
-          <div className="grid grid-cols-2 gap-4 flex-1 min-h-[160px]">
-            <Visual3 data={v3Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-2 rounded" />
-            <Visual4 data={v4Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-2 rounded" />
+          <div className="grid grid-cols-2 gap-4 flex-1 min-h-[200px]">
+            <Visual3 data={v3Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded" />
+            <Visual4 data={v4Data} className="w-full h-full flex flex-col bg-white border border-gray-100 shadow-sm p-3 rounded" />
           </div>
         </div>
 
