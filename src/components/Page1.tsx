@@ -16,12 +16,12 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
   const cumulativeDisb = data.getCumulativeDisbursementUSD(selectedMonth);
 
   const t1Rows: TableRowProps[] = [
-    { label: 'New Loan Number', renderValue: (_, v) => formatNumber(v), values: {} },
-    { label: 'Repeat Loan Number', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'No. of Loan Disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'No. of repeat loan disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
     { label: 'Total Loan Disbursed (number)', renderValue: (_, v) => formatNumber(v), values: {} },
     { label: 'New Loan Disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
-    { label: 'Repeat Loan (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
-    { label: 'Total amount of Loan (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Repeat loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Total loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'SML Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'SEL Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'Total Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
@@ -71,9 +71,9 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
 
   return (
     <div className="print-page w-[210mm] h-[297mm] max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
-      <div className="flex-none mb-4 border-b-2 border-[#1e2a5e] pb-2 flex justify-between items-end">
+      <div className="flex-none mb-4 border-b-2 border-[#294B65] pb-2 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
+          <h1 className="text-2xl font-bold text-[#294B65] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
           <p className="text-gray-500 text-xs mt-0.5">License No: UMRA03783ND</p>
           <p className="text-gray-500 text-xs">Performance Report Dashboard</p>
         </div>

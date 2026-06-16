@@ -20,7 +20,7 @@ export function Dashboard({ rawData, allMonths, selectedMonth, usdRate, onMonthC
     <div className="min-h-screen bg-gray-100 pb-12 font-sans select-none print:min-h-0 print:bg-white print:pb-0">
       {/* Control bar - hidden during print */}
       <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm print:hidden sticky top-0 z-50">
-        <h2 className="text-xl font-semibold text-[#1e2a5e]">Sajida Dashboard Generator</h2>
+        <h2 className="text-xl font-semibold text-[#294B65]">Sajida Dashboard Generator</h2>
         
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-2">
@@ -28,7 +28,7 @@ export function Dashboard({ rawData, allMonths, selectedMonth, usdRate, onMonthC
             <select 
               value={selectedMonth} 
               onChange={(e) => onMonthChange(e.target.value)}
-              className="border border-gray-300 rounded px-2 py-1 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#1e2a5e]"
+              className="border border-gray-300 rounded px-2 py-1 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#294B65]"
             >
               {allMonths.map(m => (
                 <option key={m} value={m}>{m}</option>
@@ -42,14 +42,14 @@ export function Dashboard({ rawData, allMonths, selectedMonth, usdRate, onMonthC
               type="number" 
               value={usdRate} 
               onChange={(e) => onUsdChange(Number(e.target.value))}
-              className="border border-gray-300 rounded px-2 py-1 text-sm w-24 bg-white focus:outline-none focus:ring-1 focus:ring-[#1e2a5e]"
+              className="border border-gray-300 rounded px-2 py-1 text-sm w-24 bg-white focus:outline-none focus:ring-1 focus:ring-[#294B65]"
               step="0.1"
             />
           </div>
 
           <button 
             onClick={() => window.print()}
-            className="flex items-center space-x-2 bg-[#1e2a5e] hover:bg-[#1e2a5e]/90 text-white px-4 py-2 rounded shadow transition-colors text-sm font-medium"
+            className="flex items-center space-x-2 bg-[#294B65] hover:bg-[#294B65]/90 text-white px-4 py-2 rounded shadow transition-colors text-sm font-medium"
           >
             <Printer size={16} />
             <span>Export PDF</span>

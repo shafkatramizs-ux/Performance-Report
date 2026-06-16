@@ -107,14 +107,14 @@ export default function App() {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center font-sans">
         <div className="bg-white p-10 rounded-xl shadow-md border border-gray-100 flex flex-col items-center max-w-md w-full">
-          <div className="bg-indigo-100 text-[#1e2a5e] p-4 rounded-full mb-6">
+          <div className="bg-indigo-100 text-[#294B65] p-4 rounded-full mb-6">
             <UploadCloud size={48} />
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Upload Performance Report</h2>
           <p className="text-gray-500 text-center text-sm mb-8">
             Upload the standard Excel (.xlsx) file containing the monthly microfinance dataset to automatically generate your performance dashboard.
           </p>
-          <label className="cursor-pointer bg-[#1e2a5e] hover:bg-[#1e2a5e]/90 text-white font-medium py-3 px-6 rounded text-sm shadow transition-colors w-full text-center">
+          <label className="cursor-pointer bg-[#294B65] hover:bg-[#294B65]/90 text-white font-medium py-3 px-6 rounded text-sm shadow transition-colors w-full text-center">
             Select Excel File
             <input 
               ref={fileInputRef}

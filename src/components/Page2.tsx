@@ -70,9 +70,9 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
 
   return (
     <div className="print-page w-[210mm] h-[297mm] max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
-       <div className="flex-none mb-4 border-b-2 border-[#1e2a5e] pb-2 flex justify-between items-end">
+       <div className="flex-none mb-4 border-b-2 border-[#294B65] pb-2 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-[#1e2a5e] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
+          <h1 className="text-2xl font-bold text-[#294B65] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
           <p className="text-gray-500 text-xs mt-0.5">License No: UMRA03783ND</p>
         </div>
         <div className="text-right">
@@ -82,7 +82,7 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
 
       <div className="flex-1 flex flex-col gap-3 min-h-0">
         <div className="flex-none">
-          <GenericTable compact title="Outreach & Operations" superTitle="Quarter end & latest position" columns={tableCols} rows={t2Rows} />
+          <GenericTable compact title="Particulars" topHeaderLeft="Outreach & Operations" superTitle="Quarter end & latest position" columns={tableCols} rows={t2Rows} />
         </div>
         
         <div className="flex-1 min-h-0 flex flex-col">
@@ -93,8 +93,8 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
         </div>
 
         <div className="flex-none flex flex-col gap-3">
-          <GenericTable compact title="Asset Quality & Risk" superTitle="Quarter end & latest position" columns={tableCols} rows={t3Rows} />
-          <GenericTable compact title="Security Deposit Statistics" superTitle="Quarter end & latest position" columns={tableCols} rows={t4Rows} />
+          <GenericTable compact title="Particulars" topHeaderLeft="Asset Quality & Risk" superTitle="Quarter end & latest position" columns={tableCols} rows={t3Rows} />
+          <GenericTable compact title="Particulars" topHeaderLeft="Security Deposit Statistics" superTitle="Quarter end & latest position" columns={tableCols} rows={t4Rows} />
         </div>
       </div>
 

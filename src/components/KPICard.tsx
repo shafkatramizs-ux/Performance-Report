@@ -12,7 +12,7 @@ export function KPICard({ title, value, subtitle }: KPICardProps) {
       <h3 className="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-1">
         {title}
       </h3>
-      <div className="text-xl font-bold text-[#1e2a5e]">
+      <div className="text-xl font-bold text-[#294B65]">
         {value}
       </div>
       {subtitle && (

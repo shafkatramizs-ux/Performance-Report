@@ -14,24 +14,44 @@ export interface GenericTableProps {
   rows: TableRowProps[];
   showGrowth?: boolean; // If true, expects columns to be [M-12, M-1, M] specifically
   superTitle?: string;
+  topHeaderLeft?: string;
   compact?: boolean;
 }
 
-export function GenericTable({ title, columns, rows, showGrowth, superTitle, compact }: GenericTableProps) {
+export function GenericTable({ title, columns, rows, showGrowth, superTitle, topHeaderLeft, compact }: GenericTableProps) {
   // Determine if we are rendering MoM and YoY headers
   const renderHeaders = () => {
-    return (
-      <>
-        {superTitle && (
+    const renderTopRow = () => {
+      if (!superTitle && !topHeaderLeft) return null;
+
+      if (topHeaderLeft) {
+        return (
           <tr>
-            <th className="bg-white border-0 p-0 h-1"></th>
-            <th colSpan={columns.length + (showGrowth ? 2 : 0)} className={clsx("bg-[#1e2a5e] text-white py-1 px-2 text-center font-semibold border border-[#1e2a5e] uppercase tracking-wider", compact ? "text-[10px] sm:text-xs" : "text-[10px] sm:text-xs")}>
+            <th className={clsx("bg-[#294B65] text-white py-1 px-2 text-left font-semibold border border-[#294B65] tracking-wider", compact ? "text-xs sm:text-sm" : "text-xs sm:text-sm")}>
+              {topHeaderLeft}
+            </th>
+            <th colSpan={columns.length + (showGrowth ? 2 : 0)} className={clsx("bg-[#294B65] text-white py-1 px-2 text-center font-semibold border border-[#294B65] uppercase tracking-wider", compact ? "text-[10px] sm:text-xs" : "text-[10px] sm:text-xs")}>
               {superTitle}
             </th>
           </tr>
-        )}
+        );
+      } else if (superTitle) {
+        return (
+          <tr>
+            <th colSpan={columns.length + 1 + (showGrowth ? 2 : 0)} className={clsx("bg-[#294B65] text-white py-1 px-2 text-left font-semibold border border-[#294B65] uppercase tracking-wider", compact ? "text-[10px] sm:text-xs" : "text-[10px] sm:text-xs")}>
+              {superTitle}
+            </th>
+          </tr>
+        );
+      }
+      return null;
+    };
+
+    return (
+      <>
+        {renderTopRow()}
         <tr>
-          <th className={clsx("bg-[#1e2a5e] text-white px-2 text-left font-semibold border border-[#1e2a5e]", compact ? "py-0.5 text-xs sm:text-sm" : "py-1.5 text-xs sm:text-sm")}>
+          <th className={clsx("bg-[#3CA371] text-white px-2 text-left font-semibold border border-[#3CA371]", compact ? "py-0.5 text-xs sm:text-sm" : "py-1.5 text-xs sm:text-sm")}>
             {title}
           </th>
           {columns.map((col) => {
@@ -40,9 +60,9 @@ export function GenericTable({ title, columns, rows, showGrowth, superTitle, com
               <th
                 key={col}
                 className={clsx(
-                  "px-1 text-center font-semibold border",
+                  "px-1 text-center font-semibold border text-white",
                   compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs",
-                  quarterEnded ? "bg-[#EAF0F6] text-[#1e2a5e] border-[#ccd8e5]" : "bg-indigo-50 text-indigo-900 border-indigo-100"
+                  quarterEnded ? "bg-[#359B67] border-[#3CA371]" : "bg-[#3CA371] border-[#3CA371]"
                 )}
               >
                 {col}
@@ -51,8 +71,8 @@ export function GenericTable({ title, columns, rows, showGrowth, superTitle, com
           })}
           {showGrowth && (
             <>
-              <th className={clsx("bg-gray-50 text-gray-800 px-1 text-center font-semibold border border-gray-200", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>MoM Growth</th>
-              <th className={clsx("bg-gray-50 text-gray-800 px-1 text-center font-semibold border border-gray-200", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>YoY Growth</th>
+              <th className={clsx("bg-[#3CA371] text-white px-1 text-center font-semibold border border-[#3CA371]", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>MoM Growth</th>
+              <th className={clsx("bg-[#3CA371] text-white px-1 text-center font-semibold border border-[#3CA371]", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>YoY Growth</th>
             </>
           )}
         </tr>
