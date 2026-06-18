@@ -94,14 +94,14 @@ export const Visual2 = ({ data, className }: { data: any[], className?: string }
           <LineChart data={data} margin={{ top: 30, right: 40, left: -10, bottom: 35 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
             <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} interval={0} />
-            <YAxis tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
-            <Tooltip formatter={(val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits:0}).format(val)} />
+            <YAxis tickFormatter={(val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val)} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
+            <Tooltip formatter={(val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits:0 }).format(val)} />
             <Legend verticalAlign="top" wrapperStyle={{ fontSize: '11px', top: 0, paddingBottom: 10 }} />
             <Line type="monotone" dataKey="AvgNew" stroke="#294B65" strokeWidth={2} dot={{ r: 3 }} name="Avg Loan Size (New)">
-               <LabelList dataKey="AvgNew" content={<CustomDataLabel offset={-12} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
+               <LabelList dataKey="AvgNew" content={<CustomDataLabel offset={-16} formatter={(v: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v)} />} />
             </Line>
             <Line type="monotone" dataKey="AvgRepeat" stroke="#3CA371" strokeWidth={2} dot={{ r: 3 }} name="Avg Loan Size (Repeat)">
-               <LabelList dataKey="AvgRepeat" content={<CustomDataLabel position="bottom" offset={10} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
+               <LabelList dataKey="AvgRepeat" content={<CustomDataLabel position="bottom" offset={10} formatter={(v: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v)} />} />
             </Line>
           </LineChart>
         </ResponsiveContainer>

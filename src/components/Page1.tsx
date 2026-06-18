@@ -16,12 +16,12 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
   const cumulativeDisb = data.getCumulativeDisbursementUSD(selectedMonth);
 
   const t1Rows: TableRowProps[] = [
-    { label: 'No. of Loan Disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
-    { label: 'No. of repeat loan disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'No. of New Loan Disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'No. of Repeat Loan Disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
     { label: 'Total Loan Disbursed (number)', renderValue: (_, v) => formatNumber(v), values: {}, isBold: true },
     { label: 'New Loan Disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
-    { label: 'Repeat loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
-    { label: 'Total loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {}, isBold: true },
+    { label: 'Repeat Loan Disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Total Loan Disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {}, isBold: true },
     { label: 'SML Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'SEL Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'Total Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {}, isBold: true },
