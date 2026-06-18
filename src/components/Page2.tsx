@@ -3,10 +3,10 @@ import { GenericTable, TableRowProps } from './Table';
 import { Visual3, Visual4 } from './Charts';
 import { DashboardData } from '../utils/dashboardData';
 import { formatNumber, formatPercent, formatUSD } from '../utils/formatters';
-import { getTable234Columns } from '../utils/dateHelpers';
+import { getTableColumns } from '../utils/dateHelpers';
 
 export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData, allMonths: string[], selectedMonth: string }) {
-  const tableCols = getTable234Columns(allMonths, selectedMonth);
+  const tableCols = getTableColumns(allMonths, selectedMonth);
 
   const t2Rows: TableRowProps[] = [
     { label: 'No. of Branches', renderValue: (_, v) => formatNumber(v), values: {} },
@@ -82,7 +82,7 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
 
       <div className="flex-1 flex flex-col gap-3 min-h-0">
         <div className="flex-none">
-          <GenericTable compact title="Particulars" topHeaderLeft="Outreach & Operations" superTitle="Quarter end & latest position" columns={tableCols} rows={t2Rows} />
+          <GenericTable compact title="Particulars" topHeaderLeft="Outreach & Operations" superTitle="Disbursement & Outstanding (Month End & Growth Statistics)" columns={tableCols} rows={t2Rows} showAbsoluteGrowth={true} />
         </div>
         
         <div className="flex-1 min-h-0 flex flex-col">
@@ -93,8 +93,8 @@ export function Page2({ data, allMonths, selectedMonth }: { data: DashboardData,
         </div>
 
         <div className="flex-none flex flex-col gap-3">
-          <GenericTable compact title="Particulars" topHeaderLeft="Asset Quality & Risk" superTitle="Quarter end & latest position" columns={tableCols} rows={t3Rows} />
-          <GenericTable compact title="Particulars" topHeaderLeft="Security Deposit Statistics" superTitle="Quarter end & latest position" columns={tableCols} rows={t4Rows} />
+          <GenericTable compact title="Particulars" topHeaderLeft="Asset Quality & Risk" superTitle="Disbursement & Outstanding (Month End & Growth Statistics)" columns={tableCols} rows={t3Rows} showAbsoluteGrowth={true} />
+          <GenericTable compact title="Particulars" topHeaderLeft="Security Deposit Statistics" superTitle="Disbursement & Outstanding (Month End & Growth Statistics)" columns={tableCols} rows={t4Rows} showAbsoluteGrowth={true} />
         </div>
       </div>
 

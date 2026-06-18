@@ -4,10 +4,10 @@ import { GenericTable, TableRowProps } from './Table';
 import { Visual1, Visual2 } from './Charts';
 import { DashboardData } from '../utils/dashboardData';
 import { formatUSD, formatNumber, formatPercent } from '../utils/formatters';
-import { getTable1Columns } from '../utils/dateHelpers';
+import { getTableColumns } from '../utils/dateHelpers';
 
 export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData, allMonths: string[], selectedMonth: string }) {
-  const table1Cols = getTable1Columns(allMonths, selectedMonth);
+  const table1Cols = getTableColumns(allMonths, selectedMonth);
 
   // KPIs
   const currentTotalOs = data.getTotalOutstandingUSD(selectedMonth);
@@ -18,13 +18,13 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
   const t1Rows: TableRowProps[] = [
     { label: 'No. of Loan Disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
     { label: 'No. of repeat loan disbursed', renderValue: (_, v) => formatNumber(v), values: {} },
-    { label: 'Total Loan Disbursed (number)', renderValue: (_, v) => formatNumber(v), values: {} },
+    { label: 'Total Loan Disbursed (number)', renderValue: (_, v) => formatNumber(v), values: {}, isBold: true },
     { label: 'New Loan Disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'Repeat loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
-    { label: 'Total loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Total loan disbursed (USD)', renderValue: (_, v) => formatUSD(v), values: {}, isBold: true },
     { label: 'SML Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
     { label: 'SEL Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
-    { label: 'Total Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {} },
+    { label: 'Total Outstanding (USD)', renderValue: (_, v) => formatUSD(v), values: {}, isBold: true },
   ];
 
   table1Cols.forEach(col => {

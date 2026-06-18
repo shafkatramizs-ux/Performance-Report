@@ -11,7 +11,7 @@ const CustomXAxisTick = (props: any) => {
   if (!shouldLabel(index)) return null;
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={16} textAnchor="middle" fill="#666" fontSize={12}>
+      <text x={0} y={0} dx={-12} dy={6} textAnchor="end" transform="rotate(-90)" fill="#666" fontSize={12}>
         {payload.value}
       </text>
     </g>
@@ -64,12 +64,12 @@ export const Visual1 = ({ data, className }: { data: any[], className?: string }
       <h3 className="text-[15px] font-semibold text-center mb-4 text-[#294B65]">Portfolio Composition % (SML vs SEL)</h3>
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} stackOffset="expand" margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
+          <BarChart data={data} stackOffset="expand" margin={{ top: 30, right: 0, left: -20, bottom: 35 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
-            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
+            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} interval={0} />
             <YAxis tickFormatter={(val) => `${(val * 100).toFixed(0)}%`} tick={{fontSize: 12}} tickLine={false} axisLine={false} />
             <Tooltip formatter={(val: number) => `${(val * 100).toFixed(1)}%`} />
-            <Legend wrapperStyle={{ fontSize: '12px' }} />
+            <Legend verticalAlign="top" wrapperStyle={{ fontSize: '12px', top: 0, paddingBottom: 10 }} />
             <Bar dataKey="SML" stackId="a" fill="#294B65" name="Microcredit (SML)">
               <LabelList dataKey="SML" content={<CustomDataLabel stacked formatter={(v: number) => `${(v * 100).toFixed(0)}%`} />} />
             </Bar>
@@ -84,52 +84,26 @@ export const Visual1 = ({ data, className }: { data: any[], className?: string }
 };
 
 export const Visual2 = ({ data, className }: { data: any[], className?: string }) => {
-  const [chartType, setChartType] = React.useState('bar');
-
   return (
     <div className={className || "h-72 w-full bg-white border border-gray-100 shadow-sm p-4 rounded flex flex-col relative"}>
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-[14px] font-semibold text-[#294B65]">Average loan size comparison (New vs Repeat)</h3>
-        <select 
-          value={chartType} 
-          onChange={(e) => setChartType(e.target.value)}
-          className="text-[11px] border border-gray-200 rounded px-1 py-1 text-gray-600 focus:outline-none focus:ring-1 focus:ring-[#294B65]"
-        >
-          <option value="bar">Bar Chart</option>
-          <option value="line">Trend Graph</option>
-        </select>
       </div>
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
-          {chartType === 'bar' ? (
-            <BarChart data={data} margin={{ top: 20, right: 40, left: -10, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
-              <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
-              <YAxis tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
-              <Tooltip formatter={(val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits:0}).format(val)} />
-              <Legend wrapperStyle={{ fontSize: '11px' }} />
-              <Bar dataKey="AvgNew" fill="#294B65" name="Avg Loan Size (New)">
-                 <LabelList dataKey="AvgNew" content={<CustomDataLabel offset={-16} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
-              </Bar>
-              <Bar dataKey="AvgRepeat" fill="#3CA371" name="Avg Loan Size (Repeat)">
-                 <LabelList dataKey="AvgRepeat" content={<CustomDataLabel offset={-8} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
-              </Bar>
-            </BarChart>
-          ) : (
-            <LineChart data={data} margin={{ top: 20, right: 40, left: -10, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
-              <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
-              <YAxis tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
-              <Tooltip formatter={(val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits:0}).format(val)} />
-              <Legend wrapperStyle={{ fontSize: '11px' }} />
-              <Line type="monotone" dataKey="AvgNew" stroke="#294B65" strokeWidth={2} dot={{ r: 3 }} name="Avg Loan Size (New)">
-                 <LabelList dataKey="AvgNew" content={<CustomDataLabel offset={-12} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
-              </Line>
-              <Line type="monotone" dataKey="AvgRepeat" stroke="#3CA371" strokeWidth={2} dot={{ r: 3 }} name="Avg Loan Size (Repeat)">
-                 <LabelList dataKey="AvgRepeat" content={<CustomDataLabel position="bottom" offset={10} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
-              </Line>
-            </LineChart>
-          )}
+          <LineChart data={data} margin={{ top: 30, right: 40, left: -10, bottom: 35 }}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
+            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} interval={0} />
+            <YAxis tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
+            <Tooltip formatter={(val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits:0}).format(val)} />
+            <Legend verticalAlign="top" wrapperStyle={{ fontSize: '11px', top: 0, paddingBottom: 10 }} />
+            <Line type="monotone" dataKey="AvgNew" stroke="#294B65" strokeWidth={2} dot={{ r: 3 }} name="Avg Loan Size (New)">
+               <LabelList dataKey="AvgNew" content={<CustomDataLabel offset={-12} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
+            </Line>
+            <Line type="monotone" dataKey="AvgRepeat" stroke="#3CA371" strokeWidth={2} dot={{ r: 3 }} name="Avg Loan Size (Repeat)">
+               <LabelList dataKey="AvgRepeat" content={<CustomDataLabel position="bottom" offset={10} formatter={(v: number) => `$${(v/1000).toFixed(1)}k`} />} />
+            </Line>
+          </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
@@ -142,10 +116,10 @@ export const Visual3 = ({ data, className }: { data: any[], className?: string }
       <h3 className="text-[14px] font-semibold text-center mb-2 text-[#294B65]">Risk Trend: PAR &gt; 30</h3>
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 20, right: 30, left: -20, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 20, right: 30, left: -20, bottom: 35 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
-            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
-            <YAxis tickFormatter={(val) => `${(val * 100).toFixed(1)}%`} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
+            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} interval={0} />
+            <YAxis domain={[0.005, 'auto']} tickFormatter={(val) => `${(val * 100).toFixed(1)}%`} tick={{fontSize: 11}} tickLine={false} axisLine={false} />
             <Tooltip formatter={(val: number) => `${(val * 100).toFixed(2)}%`} />
             <Line type="monotone" dataKey="PAR30" stroke="#ef4444" strokeWidth={2} dot={{ r: 3 }} name="PAR>30">
               <LabelList dataKey="PAR30" content={<CustomDataLabel offset={-12} formatter={(v: number) => `${(v * 100).toFixed(1)}%`} />} />
@@ -163,13 +137,13 @@ export const Visual4 = ({ data, className }: { data: any[], className?: string }
       <h3 className="text-[14px] font-semibold text-center mb-2 text-[#294B65]">Current Borrowers vs Per Borrowers OS</h3>
       <div className="flex-grow min-h-0 w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 20, right: 5, left: -20, bottom: 0 }}>
+          <ComposedChart data={data} margin={{ top: 30, right: 5, left: -20, bottom: 35 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
-            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} />
+            <XAxis dataKey="month" tick={<CustomXAxisTick />} tickLine={false} interval={0} />
             <YAxis yAxisId="left" tickFormatter={(v) => `$${v}`} tick={{fontSize: 11}} tickLine={false} axisLine={false} width={45} />
             <YAxis yAxisId="right" orientation="right" tickFormatter={(v) => v >= 1000 ? `${(v/1000).toFixed(1)}k` : v} tick={{fontSize: 11}} tickLine={false} axisLine={false} width={40} />
             <Tooltip />
-            <Legend wrapperStyle={{ fontSize: '11px' }} />
+            <Legend verticalAlign="top" wrapperStyle={{ fontSize: '11px', top: 0, paddingBottom: 10 }} />
             <Bar yAxisId="left" dataKey="PerBorrowerOS" fill="#3CA371" name="Per Borrower OS" maxBarSize={40} opacity={0.8}>
               <LabelList dataKey="PerBorrowerOS" content={<CustomDataLabel position="insideTop" dy={8} formatter={(v: number) => `$${v}`} />} />
             </Bar>
