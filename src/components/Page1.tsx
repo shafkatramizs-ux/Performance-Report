@@ -73,9 +73,9 @@ export function Page1({ data, allMonths, selectedMonth }: { data: DashboardData,
     <div className="print-page w-[210mm] h-[297mm] max-w-full sm:mx-auto bg-white p-6 sm:p-10 shadow-lg flex flex-col mb-8 print:mb-0 text-gray-900 border border-gray-100 box-border overflow-hidden">
       <div className="flex-none mb-4 border-b-2 border-[#294B65] pb-2 flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-[#294B65] uppercase tracking-wider leading-tight">Sajida Microfinance</h1>
+          <h1 className="text-2xl font-bold text-[#294B65] uppercase tracking-wider leading-tight">SAJIDA MICROFINANCE LIMITED</h1>
           <p className="text-gray-500 text-xs mt-0.5">License No: UMRA03783ND</p>
-          <p className="text-gray-500 text-xs">Performance Report Dashboard</p>
+          <p className="text-gray-500 text-xs">Performance Report</p>
         </div>
         <div className="text-right">
           <p className="font-semibold text-gray-700 text-sm">Period: {selectedMonth}</p>
