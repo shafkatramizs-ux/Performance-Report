@@ -75,8 +75,8 @@ export function GenericTable({ title, columns, rows, showGrowth, showAbsoluteGro
           })}
           {isAnyGrowth && (
             <>
-              <th className={clsx("bg-[#3CA371] text-white px-1 text-center font-semibold border border-[#3CA371]", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>MoM Change</th>
-              <th className={clsx("bg-[#3CA371] text-white px-1 text-center font-semibold border border-[#3CA371]", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>YoY Change</th>
+              <th className={clsx("bg-[#3CA371] text-white px-1 text-center font-semibold border border-[#3CA371]", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>{showAbsoluteGrowth ? "MoM Change" : "MoM Growth"}</th>
+              <th className={clsx("bg-[#3CA371] text-white px-1 text-center font-semibold border border-[#3CA371]", compact ? "py-0.5 text-[10px] sm:text-xs" : "py-1.5 text-[10px] sm:text-xs")}>{showAbsoluteGrowth ? "YoY Change" : "YoY Growth"}</th>
             </>
           )}
         </tr>
@@ -107,6 +107,28 @@ export function GenericTable({ title, columns, rows, showGrowth, showAbsoluteGro
               }
             }
 
+            const getSignColor = (val: number | undefined, label: string) => {
+              if (val === undefined || Math.abs(val) < 0.0001) return 'text-gray-500';
+              const labelLower = label.toLowerCase();
+              const isInverted = labelLower.includes('par') || labelLower.includes('od');
+              if (isInverted) {
+                return val > 0 ? 'text-red-600' : 'text-green-600';
+              }
+              return val > 0 ? 'text-green-600' : 'text-red-600';
+            };
+
+            const renderDiff = (val: number | undefined, label: string) => {
+              if (val === undefined) return '-';
+              const absVal = Math.abs(val);
+              const formatted = showAbsoluteGrowth ? row.renderValue('growth', absVal) : new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(absVal);
+              if (absVal < 0.0001) {
+                return formatted;
+              }
+              const sign = val > 0 ? '+' : '-';
+              const ticker = val > 0 ? ' ▲' : ' ▼';
+              return sign + formatted + ticker;
+            };
+
             return (
               <tr key={idx} className={clsx("hover:bg-gray-50", row.isBold ? "font-bold bg-indigo-50/30" : "")}>
                 <td className={clsx("px-2 border border-gray-200 text-gray-700 bg-gray-50/50", compact ? "py-0.5 text-xs sm:text-sm" : "py-1.5 text-xs sm:text-sm", row.isBold ? "font-bold" : "font-medium")}>
@@ -120,19 +142,13 @@ export function GenericTable({ title, columns, rows, showGrowth, showAbsoluteGro
                 {isAnyGrowth && (
                   <>
                     <td className={clsx("px-1.5 border border-gray-200 text-right font-medium", compact ? "py-0.5 text-[11px] sm:text-xs" : "py-1.5 text-[11px] sm:text-xs")}>
-                      <span className={clsx(mom && mom > 0 ? 'text-green-600' : mom && mom < 0 ? 'text-red-600' : 'text-gray-500')}>
-                        {mom !== undefined 
-                          ? (showAbsoluteGrowth ? row.renderValue('growth', Math.abs(mom)) : new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(Math.abs(mom))) 
-                          : '-'}
-                        {mom !== undefined && Math.abs(mom) >= (showAbsoluteGrowth ? 0.01 : 0.001) && (mom > 0 ? ' ▲' : mom < 0 ? ' ▼' : '')}
+                      <span className={clsx(getSignColor(mom, row.label), "whitespace-nowrap")}>
+                        {renderDiff(mom, row.label)}
                       </span>
                     </td>
                     <td className={clsx("px-1.5 border border-gray-200 text-right font-medium", compact ? "py-0.5 text-[11px] sm:text-xs" : "py-1.5 text-[11px] sm:text-xs")}>
-                      <span className={clsx(yoy && yoy > 0 ? 'text-green-600' : yoy && yoy < 0 ? 'text-red-600' : 'text-gray-500')}>
-                        {yoy !== undefined 
-                          ? (showAbsoluteGrowth ? row.renderValue('growth', Math.abs(yoy)) : new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(Math.abs(yoy))) 
-                          : '-'}
-                        {yoy !== undefined && Math.abs(yoy) >= (showAbsoluteGrowth ? 0.01 : 0.001) && (yoy > 0 ? ' ▲' : yoy < 0 ? ' ▼' : '')}
+                      <span className={clsx(getSignColor(yoy, row.label), "whitespace-nowrap")}>
+                        {renderDiff(yoy, row.label)}
                       </span>
                     </td>
                   </>
